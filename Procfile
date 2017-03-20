@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/tussukassi-0.1.0.jar
+worker: java -Dserver.port=$PORT -jar target/tussukassi-0.1.0.jar
