@@ -9,7 +9,7 @@ public class EchoMessageProcessor implements BotMessageProcessor {
 	@Override
 	public String get() {
 		if ( isQuestionAboutMe()) {
-			return "I am Leeloo Bot, a weather space cat.";
+			return "I am Leeloo Bot, a weather space cat. If you want to know the weather, just type 'weather CITY'.";
 		}
 		return "no entiendo: " +message +". I can only aswer about weather e.g. 'weather Rovaniemi'.";
 	}
