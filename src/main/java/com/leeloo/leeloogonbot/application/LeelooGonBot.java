@@ -3,12 +3,15 @@ package com.leeloo.leeloogonbot.application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.api.methods.send.SendVideo;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.leeloo.leeloogonbot.messageprocessors.BotMessageProcessor;
 import com.leeloo.leeloogonbot.messageprocessors.BotMessageProcessorFactory;
+import com.leeloo.leeloogonbot.messageprocessors.BotResponse;
 
 /**
  * Error when trying DI
@@ -35,10 +38,25 @@ public class LeelooGonBot extends TelegramLongPollingBot {
 				logger.info(String.format("Processing message '%s'", messsage));
         		//TimeUnit.SECONDS.sleep(10);
 				BotMessageProcessor processor = factory.build(messsage);
-				SendMessage responseMessage = new SendMessage().setChatId(update.getMessage().getChatId());
-				responseMessage.setText(processor.get());
+				BotResponse botResponse = processor.get();
+				
     		    try {
-                    sendMessage(responseMessage);
+    		    	Long chatId = update.getMessage().getChatId();
+					if (botResponse.hasText()) {
+    		    		SendMessage text = new SendMessage().setChatId(chatId).setText(botResponse.getText());
+                        sendMessage(text);	
+					}
+    		    	
+                    if (botResponse.hasVideo()) {
+                    	SendVideo video = new SendVideo().setChatId(chatId).setVideo(botResponse.getVideo());
+    					sendVideo(video );
+					}
+                    
+                    if (botResponse.hasPhoto()) {
+                    	SendVideo photo = new SendVideo().setChatId(chatId).setVideo(botResponse.getVideo());
+    					sendVideo(photo );
+					}
+                    
 				} catch (Exception e) {
 					System.err.println(e.getMessage());
 				}

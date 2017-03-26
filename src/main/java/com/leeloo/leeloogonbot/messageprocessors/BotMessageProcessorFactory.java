@@ -19,6 +19,6 @@ public class BotMessageProcessorFactory {
 			return new WeatherMessageProcessor(message);
 		}
 		else
-			return new EchoMessageProcessor(message);
+			return new DefaultMessageProcessor(message);
 	}
 }

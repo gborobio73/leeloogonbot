@@ -5,18 +5,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.leeloo.leeloogonbot.messageprocessors.BotMessageProcessor;
+import com.leeloo.leeloogonbot.messageprocessors.BotResponse;
 
 public class WeatherMessageProcessor implements BotMessageProcessor{
-	//private static final Logger logger = LoggerFactory.getLogger(WeatherMessageProcessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(WeatherMessageProcessor.class);
 	private String message;
 	
 	public WeatherMessageProcessor(String message) {
 		this.message = message;
-		
 	}
 	
-	public String get() {
-		String response ="";
+	public BotResponse get() {
+		
+		BotResponse response = new BotResponse();
 		try {
 			String city = "Helsinki";
 			if (this.message.split(" ").length >1) {
@@ -38,10 +39,12 @@ public class WeatherMessageProcessor implements BotMessageProcessor{
     		String url = String.format("%s%s%s&%s", baseUrl, city, country, apiKey) ;
     		OpenWeatherResponseDto wr = restTemplate.getForObject(url, OpenWeatherResponseDto.class);
     		double tempInCelsius = wr.getMain().getTemp() -273.15;
-            response = String.format("%s %s, %.0f °C, %s", wr.getName(), wr.getSys().getCountry(), tempInCelsius, 
-            		wr.getWeather().get(0).getDescription());
+            response.setText( String.format("%s %s, %.0f °C, %s", wr.getName(), wr.getSys().getCountry(), tempInCelsius, 
+            		wr.getWeather().get(0).getDescription()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getMessage());
+			response.setText("Oops! Something is not right. Please, ask me again later.");
 		}
 		return response;
 	}
