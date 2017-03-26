@@ -8,7 +8,7 @@ public class EchoMessageProcessor implements BotMessageProcessor {
 	}
 	@Override
 	public String get() {
-		return message;
+		return "no entiendo: " +message;
 	}
 
 }
