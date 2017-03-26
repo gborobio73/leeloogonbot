@@ -8,10 +8,15 @@ public class EchoMessageProcessor implements BotMessageProcessor {
 	}
 	@Override
 	public String get() {
-		if ((message.contains("quien") || message.contains("quién"))&& message.contains("eres") ) {
-			return "I am Leeloo Bot";
+		if ( isQuestionAboutMe()) {
+			return "I am Leeloo Bot, a space cat.";
 		}
-		return "no entiendo: " +message +". I can only aswer about weather e.g. 'weather Rovaniemi'";
+		return "no entiendo: " +message +". I can only aswer about weather e.g. 'weather Rovaniemi'.";
+	}
+	
+	private boolean isQuestionAboutMe(){
+		return ((message.contains("quien") || message.contains("quién")) && message.contains("eres") ||
+				message.contains("who") && message.contains("are") && message.contains("you"));
 	}
 
 }
