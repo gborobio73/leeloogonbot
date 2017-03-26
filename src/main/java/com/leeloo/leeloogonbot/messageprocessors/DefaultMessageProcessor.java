@@ -14,7 +14,7 @@ public class DefaultMessageProcessor implements BotMessageProcessor {
 			response.setVideo("https://media.giphy.com/media/O0oQygeklvnX2/giphy.gif");
 		}
 		else{
-			response.setText("No comårendo: " +message +". I can only aswer about weather e.g. 'weather Rovaniemi'.");
+			response.setText("No comprendo: " +message +". I can only aswer about weather e.g. 'weather Rovaniemi'.");
 		} 
 		return response;
 	}
