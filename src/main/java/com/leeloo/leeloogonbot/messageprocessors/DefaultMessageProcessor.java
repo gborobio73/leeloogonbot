@@ -10,11 +10,11 @@ public class DefaultMessageProcessor implements BotMessageProcessor {
 	public BotResponse get() {
 		BotResponse response = new BotResponse();
 		if ( isQuestionAboutMe() || isHello()) {
-			response.setText("I am Leeloo Bot, a space weather cat. If you want to know the weather, just type 'weather CITY'.");
+			response.setText("Hello, I am Leeloo Bot, a space weather cat. If you want to know about the weather, just type 'weather CITY'.");
 			response.setVideo("https://media.giphy.com/media/O0oQygeklvnX2/giphy.gif");
 		}
 		else{
-			response.setText("No comprendo: " +message +". I can only aswer about weather e.g. 'weather Rovaniemi'.");
+			response.setText(String.format("No comprendo '%s'. I can only aswer about weather e.g. 'weather Rovaniemi'.", message));
 		} 
 		return response;
 	}
