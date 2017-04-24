@@ -8,7 +8,6 @@ import org.telegram.telegrambots.api.methods.send.SendVideo;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.leeloo.leeloogonbot.messageprocessors.BotMessageProcessor;
 import com.leeloo.leeloogonbot.messageprocessors.BotMessageProcessorFactory;
 import com.leeloo.leeloogonbot.messageprocessors.BotResponse;
@@ -53,8 +52,8 @@ public class LeelooGonBot extends TelegramLongPollingBot {
 					}
                     
                     if (botResponse.hasPhoto()) {
-                    	SendVideo photo = new SendVideo().setChatId(chatId).setVideo(botResponse.getVideo());
-    					sendVideo(photo );
+                    	SendPhoto photo = new SendPhoto().setChatId(chatId).setPhoto(botResponse.getPhoto());
+    					sendPhoto(photo );
 					}
                     
 				} catch (Exception e) {
@@ -69,7 +68,6 @@ public class LeelooGonBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        
         return "leeloo_gon_boot";
     }
 
@@ -77,10 +75,4 @@ public class LeelooGonBot extends TelegramLongPollingBot {
     public String getBotToken() {
     	return "361073867:AAFOYnERRINBZT0HlXAoDf9ccORGgXkvCfY";
     }
-    
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public class WeatherResponse{
-    	Object main;
-    }
-    
 }

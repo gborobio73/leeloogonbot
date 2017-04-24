@@ -15,6 +15,10 @@ public class BotMessageProcessorFactory {
 
 	}
 	public BotMessageProcessor build(String message){
+//		if (parser.isACommand(message)) {
+//			return new CommandMessageProcessor(message);
+//		}
+		
 		if (parser.isAboutWeather(message)) {
 			return new WeatherMessageProcessor(message);
 		}

@@ -11,6 +11,7 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import com.leeloo.leeloogonbot.commands.LeelooCommandsHandler;
 import com.leeloo.leeloogonbot.messageprocessors.BotMessageProcessorFactory;
 
 @Configuration
@@ -24,14 +25,13 @@ public class ConfigureBots {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
         	ApiContextInitializer.init();
-	        TelegramBotsApi botsApi = new TelegramBotsApi();
-	
 	        try {
-	        	LeelooGonBot leelooGonBot = new LeelooGonBot(factory);
-				botsApi.registerBot(leelooGonBot );
-	            logger.info("Bots configured.");
+//	        	new TelegramBotsApi().registerBot(new LeelooGonBot(factory) );
+	        	new TelegramBotsApi().registerBot(new LeelooCommandsHandler() );
+	        	
+	            logger.info("Leeloo Gon Bot configured.");
 	        } catch (TelegramApiException e) {
-	        	logger.error("Error when configuring bots");
+	        	logger.error("Error when configuring Leeloo Gon Bot.");
 	            System.err.println(e.getMessage());
 	        }            
         };

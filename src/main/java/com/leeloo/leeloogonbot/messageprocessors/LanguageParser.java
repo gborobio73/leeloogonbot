@@ -11,4 +11,9 @@ public class LanguageParser {
 				message.toLowerCase().contains("wea") ||
 				message.toLowerCase().contains("tpo");
 	}
+
+	public boolean isACommand(String message) {
+		return message.startsWith("/");
+	}
 }
+
