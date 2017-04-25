@@ -57,11 +57,11 @@ public class LeelooCommandsHandler extends TelegramLongPollingCommandBot {
 
     @Override
     public String getBotUsername() {
-        return "leeloo_gon_boot";
+        return "secret_";
     }
 
     @Override
     public String getBotToken() {
-    	return "361073867:AAFOYnERRINBZT0HlXAoDf9ccORGgXkvCfY";
+    	return "secret_";
     }
 }

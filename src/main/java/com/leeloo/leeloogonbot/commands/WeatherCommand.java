@@ -39,7 +39,7 @@ public class WeatherCommand extends BotCommand {
             userName = user.getFirstName() + " " + user.getLastName();
         }
 		
-		WeatherCommandProcessor weatherCommandProcessor = 
+        WeatherCommandProcessor weatherCommandProcessor = 
 				new WeatherCommandProcessor(userName, city, country);
 		
 		Runnable task = () -> {

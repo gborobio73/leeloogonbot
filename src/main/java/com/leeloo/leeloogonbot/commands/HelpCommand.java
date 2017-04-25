@@ -11,11 +11,6 @@ import org.telegram.telegrambots.bots.commands.ICommandRegistry;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.logging.BotLogger;
 
-/**
- * This command helps the user to find the command they need
- *
- * @author Timo Schulz (Mit0x2)
- */
 public class HelpCommand extends BotCommand {
 
     private static final String LOGTAG = "HELPCOMMAND";
@@ -33,7 +28,9 @@ public class HelpCommand extends BotCommand {
         helpMessageBuilder.append("These are the registered commands for this Bot:\n\n");
 
         for (BotCommand botCommand : commandRegistry.getRegisteredCommands()) {
-            helpMessageBuilder.append(botCommand.toString()).append("\n\n");
+        	helpMessageBuilder.append(String.format("/%s - %s", botCommand.getCommandIdentifier(), 
+        					botCommand.getDescription())).append("\n\n");
+            //helpMessageBuilder.append(botCommand.toString()).append("\n\n");
         }
 
         SendMessage helpMessage = new SendMessage();
